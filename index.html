@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>eCalculator | Drone Academy & Build Planner</title>
+  <meta name="description" content="Drone tipi seçimi, görev analizi, eğitim akışı ve temel mühendislik hesapları için profesyonel MVP." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Ana menü">
+      <a class="brand" href="#top" aria-label="eCalculator ana sayfa">
+        <span class="brand-mark">eC</span>
+        <span>
+          <strong>eCalculator</strong>
+          <small>Drone Academy & Build Planner</small>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="#wizard">Seçim Asistanı</a>
+        <a href="#education">Eğitim</a>
+        <a href="#calculator">Hesaplama</a>
+        <a href="#roadmap">Yol Haritası</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy">
+        <span class="eyebrow">Profesyonel Drone Tasarım Başlangıcı</span>
+        <h1>Kullanıcıya sadece hesap yaptırma; doğru drone tipini seçtir, nedenini öğret, sonra tasarıma yönlendir.</h1>
+        <p>
+          Bu MVP; eğitim platformu, konsept seçim asistanı ve ön mühendislik hesaplayıcısını tek ekranda birleştirir. Kullanıcı amacını, payload ihtiyacını, uçuş süresini ve ortam koşullarını girer; sistem uygun mimariyi, riskleri ve doğrulama adımlarını açıklar.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#wizard">Projeye başla</a>
+          <a class="btn secondary" href="#education">Önce öğren</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="MVP çıktıları">
+        <div class="status-pill">MVP v0.1</div>
+        <h2>Çıktılar</h2>
+        <ul class="check-list">
+          <li>Drone tipi önerisi</li>
+          <li>Görev uygunluğu skoru</li>
+          <li>Bileşen seçimi rehberi</li>
+          <li>Thrust / batarya / süre hesabı</li>
+          <li>Test ve doğrulama planı</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="wizard" class="section-shell split-section">
+      <div>
+        <span class="eyebrow">Adım 1</span>
+        <h2>Görev amacını ve drone sınıfını seç</h2>
+        <p class="section-intro">
+          Kullanıcıya önce “ne yapmak istiyorsun?” sorulur. Çünkü drone tasarımında frame, motor, batarya, pervane ve kontrol sistemi seçimi görevden bağımsız yapılamaz.
+        </p>
+      </div>
+      <form id="plannerForm" class="panel form-grid">
+        <label>
+          Görev amacı
+          <select id="mission" required></select>
+        </label>
+        <label>
+          Drone tipi
+          <select id="droneType" required></select>
+        </label>
+        <label>
+          Payload ağırlığı (kg)
+          <input id="payload" type="number" min="0" step="0.1" value="2" />
+        </label>
+        <label>
+          Hedef uçuş süresi (dk)
+          <input id="endurance" type="number" min="5" step="1" value="25" />
+        </label>
+        <label>
+          Tahmini toplam kalkış ağırlığı / MTOW (kg)
+          <input id="mtow" type="number" min="0.5" step="0.1" value="8" />
+        </label>
+        <label>
+          Motor sayısı
+          <select id="motors">
+            <option value="4">Quadcopter / 4 motor</option>
+            <option value="6">Hexacopter / 6 motor</option>
+            <option value="8">X8 veya Octocopter / 8 motor</option>
+            <option value="12">Ağır yük / 12 motor</option>
+          </select>
+        </label>
+        <label>
+          Batarya voltajı
+          <select id="voltage">
+            <option value="14.8">4S - 14.8 V</option>
+            <option value="22.2">6S - 22.2 V</option>
+            <option value="44.4">12S - 44.4 V</option>
+            <option value="51.8" selected>14S - 51.8 V</option>
+          </select>
+        </label>
+        <label>
+          Kullanıcı seviyesi
+          <select id="skill">
+            <option value="beginner">Başlangıç</option>
+            <option value="intermediate">Orta seviye</option>
+            <option value="professional">Profesyonel / Ar-Ge</option>
+          </select>
+        </label>
+        <label class="full">
+          Operasyon ortamı
+          <select id="environment">
+            <option value="open">Açık alan / düşük risk</option>
+            <option value="urban">Şehir içi / engelli çevre</option>
+            <option value="hot">Yüksek sıcaklık / yangın çevresi</option>
+            <option value="industrial">Endüstriyel saha</option>
+            <option value="longrange">Uzun menzil / kırsal hat</option>
+          </select>
+        </label>
+        <button class="btn primary full" type="submit">Analiz et ve öner</button>
+      </form>
+    </section>
+
+    <section class="section-shell results-layout" aria-live="polite">
+      <article class="panel result-card">
+        <span class="eyebrow">Öneri</span>
+        <h2 id="recommendationTitle">Seçim sonrası mimari önerisi burada oluşacak</h2>
+        <p id="recommendationText" class="muted">Formu doldurup analiz ettiğinizde sistem, seçimin neden uygun olduğunu ve hangi risklere dikkat edilmesi gerektiğini açıklar.</p>
+        <div id="scoreBar" class="score-bar" aria-label="Uygunluk skoru"><span style="width: 0%"></span></div>
+        <p id="scoreText" class="score-text">Uygunluk skoru: -</p>
+      </article>
+      <article class="panel">
+        <span class="eyebrow">Neden bu seçim?</span>
+        <div id="whyBox" class="rich-text muted">Görev amacı ve drone tipi seçimine göre kullanıcıya eğitim içerikli açıklama verilir.</div>
+      </article>
+      <article class="panel">
+        <span class="eyebrow">Bileşen öncelikleri</span>
+        <ul id="componentList" class="bullet-list"></ul>
+      </article>
+    </section>
+
+    <section id="education" class="section-shell">
+      <div class="section-heading">
+        <span class="eyebrow">Eğitim Akışı</span>
+        <h2>Drone inşasını aşama aşama öğret</h2>
+        <p class="section-intro">Kullanıcı her aşamada neyi seçtiğini, neden seçtiğini ve yanlış seçerse ne olacağını görmelidir.</p>
+      </div>
+      <div id="educationCards" class="card-grid"></div>
+    </section>
+
+    <section id="calculator" class="section-shell split-section reverse">
+      <div class="panel calculation-panel">
+        <span class="eyebrow">Hesaplama Çekirdeği</span>
+        <h2>Ön mühendislik sonuçları</h2>
+        <dl class="metric-list">
+          <div><dt>Motor başına hover yükü</dt><dd id="metricMotorLoad">-</dd></div>
+          <div><dt>Önerilen minimum toplam thrust</dt><dd id="metricThrust">-</dd></div>
+          <div><dt>Tahmini hover gücü</dt><dd id="metricPower">-</dd></div>
+          <div><dt>Tahmini hover akımı</dt><dd id="metricCurrent">-</dd></div>
+          <div><dt>Gerekli batarya enerjisi</dt><dd id="metricEnergy">-</dd></div>
+        </dl>
+      </div>
+      <div>
+        <span class="eyebrow">Kritik Not</span>
+        <h2>Bu hesaplar ön tasarım içindir</h2>
+        <p class="section-intro">
+          Gerçek tasarımda motor datasheet’i, pervane verimi, hava yoğunluğu, ESC kayıpları, kablo gerilim düşümü, batarya C değeri, termal sınırlar ve regülasyon gereklilikleri ayrıca doğrulanmalıdır.
+        </p>
+        <div class="warning-box">
+          Güvenli tasarım için thrust-to-weight oranı hobi/kamera dronlarında genellikle 2:1 civarı hedeflenir. Ağır yük, yangın, endüstriyel veya güvenlik görevlerinde daha yüksek güvenlik payı ve kontrollü test protokolü gerekir.
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section-shell">
+      <div class="section-heading">
+        <span class="eyebrow">Ürünleştirme</span>
+        <h2>MVP’den profesyonel ürüne geçiş planı</h2>
+      </div>
+      <div class="timeline">
+        <div><strong>1. Faz</strong><span>Statik MVP, seçim asistanı, eğitim kartları ve temel hesaplama.</span></div>
+        <div><strong>2. Faz</strong><span>React/Next.js arayüz, kullanıcı proje kaydı, PDF rapor çıktısı.</span></div>
+        <div><strong>3. Faz</strong><span>Motor, ESC, pervane ve batarya veritabanı; üretici datasheet doğrulaması.</span></div>
+        <div><strong>4. Faz</strong><span>Regülasyon, test checklistleri, profesyonel proje dosyası üretimi.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="section-shell footer-inner">
+      <span>eCalculator MVP</span>
+      <span>Drone Academy · Build Planner · Calculation Core</span>
+    </div>
+  </footer>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
