@@ -1,0 +1,2 @@
+import { NextResponse } from 'next/server';import bcrypt from 'bcryptjs';
+export async function POST(req:Request){const b=await req.json();if(!b.email||!b.password||b.password.length<8)return NextResponse.json({success:false,error:{code:'VALIDATION_ERROR',message:'E-posta ve en az 8 karakter parola gerekli.',details:[]}},{status:400});return NextResponse.json({success:true,data:{id:'demo-user',email:b.email,name:b.name??'',role:'user',password_hash_preview:(await bcrypt.hash(b.password,10)).slice(0,12)}})}

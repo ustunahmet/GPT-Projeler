@@ -1,0 +1,1 @@
+import { Nav } from '@/components/ui/Nav';export default function Page(){return <><Nav/><div className="container"><h1>Admin İçerik Yönetimi</h1><div className="card"><h2>Modül/Ders CRUD</h2><p>Admin ve editör rolleri modül/ders oluşturabilir; yayın durumunu yalnızca admin değiştirebilir.</p><button className="btn">Yeni ders oluştur</button></div></div></>}

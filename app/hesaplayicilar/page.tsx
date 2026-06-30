@@ -1,0 +1,2 @@
+import { Nav } from '@/components/ui/Nav';import { calculators, safetyNotice } from '@/lib/data';
+export default function Page(){return <><Nav/><div className="container"><h1>Hesaplayıcılar</h1><p className="warn">{safetyNotice}</p><div className="grid">{calculators.map(c=><div className="card" key={c.code}><h2>{c.title}</h2><p>{c.desc}</p><a className="btn" href={`/hesaplayicilar/${c.slug}`}>Hesapla</a></div>)}</div></div></>}

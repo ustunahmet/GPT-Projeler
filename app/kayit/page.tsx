@@ -1,0 +1,1 @@
+import { Nav } from '@/components/ui/Nav';export default function Page(){return <><Nav/><div className="container"><h1>Kayıt</h1><form className="form card"><label>Ad<input required/></label><label>E-posta<input type="email" required/></label><label>Parola<input type="password" minLength={8} required/></label><button className="btn">Hesap oluştur</button></form></div></>}

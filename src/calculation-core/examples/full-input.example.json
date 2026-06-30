@@ -1,0 +1,11 @@
+{
+  "project": { "name": "Demo Eğitim Quad", "use_case": "education", "payload_type": "camera" },
+  "environment": { "altitude_m": 0, "temperature_c": 15, "air_density_kg_m3": null, "wind_m_s": 0 },
+  "airframe": { "configuration": "quad", "rotor_count": 4, "coaxial": false },
+  "mass": { "frame_kg": 1.2, "battery_kg": 0.8, "payload_kg": 0.3, "electronics_kg": 0.2, "margin_percent": 0 },
+  "geometry": { "prop_diameter_in": 13, "arm_length_m": 0.35, "frontal_area_m2": 0.08, "cd_estimate": 1.1 },
+  "propulsion": { "motor_count": 4, "max_thrust_per_motor_n": 25, "motor_test_table": [] },
+  "battery": { "series_s": 6, "parallel_p": 1, "cell_capacity_ah": 5, "cell_nominal_v": 3.7, "usable_dod": 0.8, "eta_pack": 0.97, "aging_factor": 0.9, "pack_internal_resistance_mohm": 35 },
+  "electrical": { "esc_continuous_a": 40, "wire_length_m": 0.35, "wire_area_mm2": 5.26, "connector_continuous_a": 90 },
+  "mission": { "hover_minutes": 10, "reserve_percent": 25 }
+}

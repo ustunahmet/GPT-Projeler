@@ -1,0 +1,2 @@
+import { Nav } from '@/components/ui/Nav';import { modules } from '@/lib/data';
+export default function Page(){return <><Nav/><div className="container"><h1>Eğitim Modülleri</h1><div className="grid">{modules.map(m=><article className="card" key={m.slug}><h2>{m.title}</h2><p>Seviye: {m.level}</p><ul>{m.lessons.map(l=><li key={l}>{l} · kontrol listesi · tamamla</li>)}</ul></article>)}</div></div></>}
