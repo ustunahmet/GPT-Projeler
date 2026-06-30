@@ -1,0 +1,1 @@
+export const seedPlan = { adminEmail: 'admin@ecalculator.local', modules: ['Drone 101','Parça ve Sistem Mimarisi','Temel Hesaplar','Kurulum Yol Haritası','Test ve İlk Uçuş Hazırlığı'], calculators: ['CALC-THRUST','CALC-BATTERY','CALC-CURRENT','CALC-DISK','CALC-PAYLOAD'] };

@@ -1,0 +1,8 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "sqlite" url = env("DATABASE_URL") }
+model User { id String @id @default(cuid()) email String @unique passwordHash String name String? role String @default("user") emailVerifiedAt DateTime? createdAt DateTime @default(now()) updatedAt DateTime @updatedAt projects Project[] }
+model Project { id String @id @default(cuid()) userId String name String droneType String targetUse String? motorCount Int auwKg Float payloadKg Float? batteryVoltageV Float? batteryCapacityAh Float? notes String? status String @default("active") user User @relation(fields:[userId], references:[id]) calculatorRuns CalculatorRun[] }
+model CalculatorRun { id String @id @default(cuid()) userId String projectId String? calculatorCode String inputJson Json outputJson Json createdAt DateTime @default(now()) project Project? @relation(fields:[projectId], references:[id]) }
+model EducationModule { id String @id @default(cuid()) title String slug String @unique description String? level String sortOrder Int status String @default("draft") lessons Lesson[] }
+model Lesson { id String @id @default(cuid()) moduleId String title String slug String @unique summary String? contentMarkdown String estimatedMinutes Int sortOrder Int status String @default("draft") module EducationModule @relation(fields:[moduleId], references:[id]) checklistItems ChecklistItem[] }
+model ChecklistItem { id String @id @default(cuid()) lessonId String text String sortOrder Int isRequired Boolean @default(false) lesson Lesson @relation(fields:[lessonId], references:[id]) }
