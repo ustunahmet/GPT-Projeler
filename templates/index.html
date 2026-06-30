@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Frame Extraction Web Tool</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <h1>Video Frame Extraction Web Tool</h1>
+        <p class="subtitle">Upload a video, configure extraction, and generate frame exports.</p>
+
+        {% if error %}
+        <div class="error-box">{{ error }}</div>
+        {% endif %}
+
+        <form action="/process" method="post" enctype="multipart/form-data" id="uploadForm">
+          <div class="field-group">
+            <label for="video">Video file</label>
+            <input type="file" id="video" name="video" accept="video/*" required />
+          </div>
+
+          <div class="field-group">
+            <label for="extraction_mode">Extraction mode</label>
+            <select id="extraction_mode" name="extraction_mode" required>
+              <option value="all">Extract all frames</option>
+              <option value="nth">Extract every Nth frame</option>
+              <option value="seconds">Extract one frame every X seconds</option>
+            </select>
+          </div>
+
+          <div class="field-group" id="nthField" hidden>
+            <label for="nth_frame">N value (every Nth frame)</label>
+            <input type="number" id="nth_frame" name="nth_frame" min="1" step="1" placeholder="e.g. 10" />
+          </div>
+
+          <div class="field-group" id="secondsField" hidden>
+            <label for="seconds_interval">Seconds interval</label>
+            <input type="number" id="seconds_interval" name="seconds_interval" min="0.01" step="0.01" placeholder="e.g. 0.5" />
+          </div>
+
+          <button type="submit">Process Video</button>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const modeSelect = document.getElementById('extraction_mode');
+      const nthField = document.getElementById('nthField');
+      const secondsField = document.getElementById('secondsField');
+      const nthInput = document.getElementById('nth_frame');
+      const secondsInput = document.getElementById('seconds_interval');
+
+      function updateFields() {
+        const mode = modeSelect.value;
+        nthField.hidden = mode !== 'nth';
+        secondsField.hidden = mode !== 'seconds';
+
+        nthInput.required = mode === 'nth';
+        secondsInput.required = mode === 'seconds';
+      }
+
+      modeSelect.addEventListener('change', updateFields);
+      updateFields();
+    </script>
+  </body>
+</html>

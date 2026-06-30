@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extraction Result - Video Frame Extraction Web Tool</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="container wide">
+      <div class="toolbar">
+        <a href="/" class="link-button">← New Extraction</a>
+        <div class="download-links">
+          <a href="/download/{{ summary.job_id }}/json">Download JSON</a>
+          <a href="/download/{{ summary.job_id }}/csv">Download CSV</a>
+          <a href="/download/{{ summary.job_id }}/zip">Download ZIP</a>
+        </div>
+      </div>
+
+      <section class="card summary-grid">
+        <h1>Processing Summary</h1>
+        <div class="summary-item"><strong>Original file:</strong> {{ summary.source_filename }}</div>
+        <div class="summary-item"><strong>Total frames (source):</strong> {{ summary.total_frames }}</div>
+        <div class="summary-item"><strong>Extracted frames:</strong> {{ summary.extracted_count }}</div>
+        <div class="summary-item"><strong>FPS:</strong> {{ summary.fps }}</div>
+        <div class="summary-item"><strong>Duration (s):</strong> {{ summary.duration_seconds }}</div>
+        <div class="summary-item"><strong>Mode:</strong> {{ summary.extraction_mode }}</div>
+      </section>
+
+      <section class="card">
+        <h2>Frame Gallery</h2>
+        <div class="gallery">
+          {% for frame in frames %}
+          <figure class="thumb-card">
+            <img src="/outputs/{{ summary.job_id }}/{{ frame.filename }}" alt="{{ frame.filename }}" loading="lazy" />
+            <figcaption>#{{ frame.frame_index }} · {{ frame.timestamp_seconds }}s</figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Frame Metadata</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>frame_index</th>
+                <th>timestamp_seconds</th>
+                <th>filename</th>
+                <th>relative_path</th>
+                <th>width</th>
+                <th>height</th>
+                <th>extraction_status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for frame in frames %}
+              <tr>
+                <td>{{ frame.frame_index }}</td>
+                <td>{{ frame.timestamp_seconds }}</td>
+                <td>{{ frame.filename }}</td>
+                <td>{{ frame.relative_path }}</td>
+                <td>{{ frame.width }}</td>
+                <td>{{ frame.height }}</td>
+                <td>{{ frame.extraction_status }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
